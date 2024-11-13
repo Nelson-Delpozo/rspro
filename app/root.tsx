@@ -1,6 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import type { LinksFunction, LoaderArgs } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -10,28 +9,35 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import { getUser } from "~/utils/session.server";
 import stylesheet from "~/tailwind.css";
+import { getUser } from "~/utils/session.server";
 
+// Add links for stylesheets
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  return json({ user: await getUser(request) });
+// Loader to fetch user data
+export const loader = async ({ request }: LoaderArgs) => {
+  const user = await getUser(request);
+  return new Response(JSON.stringify({ user }), {
+    headers: { "Content-Type": "application/json" },
+  });
 };
 
+
+// Main App component
 export default function App() {
   return (
     <html lang="en" className="h-full">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="h-full bg-gray-100 text-gray-900">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

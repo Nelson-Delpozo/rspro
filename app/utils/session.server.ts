@@ -1,17 +1,14 @@
-import { createCookieSessionStorage, redirect } from "@remix-run/node";
+import { createCookieSessionStorage } from "@remix-run/node";
 
-import { prisma } from "~/db.server";
-
-// Session storage setup
-const sessionSecret = process.env.SESSION_SECRET || "super-secret-key"; // Use a secure key in production
+const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {
-  throw new Error("SESSION_SECRET must be set");
+  throw new Error("SESSION_SECRET must be set in your environment variables.");
 }
 
 export const sessionStorage = createCookieSessionStorage({
   cookie: {
-    name: "rspro_session",
-    secure: process.env.NODE_ENV === "production", // Use HTTPS in production
+    name: "__session",
+    secure: process.env.NODE_ENV === "production",
     secrets: [sessionSecret],
     sameSite: "lax",
     path: "/",
@@ -19,48 +16,46 @@ export const sessionStorage = createCookieSessionStorage({
   },
 });
 
-// Get user session
-export async function getSession(request: Request) {
-  const cookie = request.headers.get("Cookie");
-  return sessionStorage.getSession(cookie);
+export const { getSession, commitSession, destroySession } = sessionStorage;
+
+export async function getUser(request: Request) {
+  const session = await getSession(request.headers.get("Cookie"));
+  const userId = session.get("userId");
+  if (!userId) {
+    return null;
+  }
+  return { id: userId };
 }
 
-// Create a new session
 export async function createUserSession(userId: string, redirectTo: string) {
   const session = await sessionStorage.getSession();
   session.set("userId", userId);
-  return redirect(redirectTo, {
+  return new Response(null, {
     headers: {
-      "Set-Cookie": await sessionStorage.commitSession(session),
+      "Set-Cookie": await commitSession(session),
+      Location: redirectTo,
     },
+    status: 302,
   });
 }
 
-// Destroy session
-export async function destroyUserSession(request: Request) {
-  const session = await getSession(request);
-  return redirect("/auth/login", {
-    headers: {
-      "Set-Cookie": await sessionStorage.destroySession(session),
-    },
-  });
-}
-
-// Require authentication
-export async function requireUserId(request: Request) {
-  const session = await getSession(request);
+export async function requireUserId(request: Request): Promise<string> {
+  const session = await getSession(request.headers.get("Cookie"));
   const userId = session.get("userId");
-  if (!userId) throw redirect("/auth/login");
+
+  if (!userId) {
+    throw new Response("Unauthorized", { status: 401 });
+  }
+
   return userId;
 }
 
-export async function requireUserRoles(request: Request) {
-  const userId = await requireUserId(request);
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { roles: true },
+export async function logout(request: Request) {
+  const session = await getSession(request.headers.get("Cookie"));
+  return new Response(null, {
+    headers: {
+      "Set-Cookie": await destroySession(session),
+    },
+    status: 302,
   });
-  if (!user) throw redirect("/auth/login");
-  return user.roles;
 }
-
