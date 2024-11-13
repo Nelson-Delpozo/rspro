@@ -1,38 +1,168 @@
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant {
+  id          String          @id @default(uuid())
+  name        String
+  phoneNumber String?
+  location    String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  users       User[]
+  shifts      Shift[]
+  availability Availability[] // Restaurant's availability records
+  subscription Subscription?
+  invitations Invitation[]
+}
+
 model User {
-  id    String @id @default(cuid())
-  email String @unique
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  password Password?
-  notes    Note[]
+  id                 String         @id @default(uuid())
+  email              String         @unique
+  password           String
+  name               String
+  phoneNumber        String?        @unique
+  roles              Role[]
+  restaurantId       String
+  restaurant         Restaurant     @relation(fields: [restaurantId], references: [id])
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  shifts             Shift[]
+  availability       Availability[]
+  initiatedRequests  ShiftRequest[] @relation("RequestInitiator")
+  targetedRequests   ShiftRequest[] @relation("RequestTarget")
+  managedRequests    ShiftRequest[] @relation("RequestManager")
+  notificationsSent  Notification[] @relation("Sender")
+  notificationsReceived Notification[] @relation("Recipient")
 }
 
-model Password {
-  hash String
-
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId String @unique
+model Shift {
+  id           String         @id @default(uuid())
+  restaurantId String
+  restaurant   Restaurant     @relation(fields: [restaurantId], references: [id])
+  date         DateTime
+  startTime    DateTime
+  endTime      DateTime
+  role         ShiftRole
+  assignedToId String?
+  assignedTo   User?          @relation(fields: [assignedToId], references: [id])
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  shiftRequests ShiftRequest[]
 }
 
-model Note {
-  id    String @id @default(cuid())
-  title String
-  body  String
+model Availability {
+  id           String     @id @default(uuid())
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  date         DateTime
+  startTime    DateTime
+  endTime      DateTime
+  createdAt    DateTime   @default(now())
+}
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model ShiftRequest {
+  id           String     @id @default(uuid())
+  shiftId      String
+  shift        Shift      @relation(fields: [shiftId], references: [id])
+  userId       String
+  user         User       @relation("RequestInitiator", fields: [userId], references: [id])
+  targetUserId String?
+  targetUser   User?      @relation("RequestTarget", fields: [targetUserId], references: [id])
+  managerId    String?
+  manager      User?      @relation("RequestManager", fields: [managerId], references: [id])
+  type         RequestType
+  status       RequestStatus
+  createdAt    DateTime   @default(now())
+  resolvedAt   DateTime?
+}
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId String
+model Notification {
+  id          String     @id @default(uuid())
+  senderId    String?
+  sender      User?      @relation("Sender", fields: [senderId], references: [id])
+  recipientId String
+  recipient   User       @relation("Recipient", fields: [recipientId], references: [id])
+  message     String
+  type        NotificationType
+  sentAt      DateTime   @default(now())
+  readAt      DateTime?
+}
+
+model Subscription {
+  id                  String     @id @default(uuid())
+  restaurantId        String     @unique
+  restaurant          Restaurant @relation(fields: [restaurantId], references: [id])
+  plan                SubscriptionPlan
+  trialEnds           DateTime?
+  isActive            Boolean
+  stripeCustomerId    String?
+  stripeSubscriptionId String?
+  billingCycleStart   DateTime?
+  billingCycleEnd     DateTime?
+  createdAt           DateTime   @default(now())
+}
+
+model Invitation {
+  id           String     @id @default(uuid())
+  email        String
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  role         Role[]
+  token        String     @unique
+  expiresAt    DateTime
+  acceptedAt   DateTime?
+  createdAt    DateTime   @default(now())
+}
+
+enum Role {
+  MANAGER
+  SERVER
+  BARTENDER
+  BUSSER
+  KITCHEN
+  BARBACK
+  EXPO
+}
+
+enum ShiftRole {
+  SERVER
+  BARTENDER
+  BUSSER
+  KITCHEN
+  BARBACK
+  EXPO
+  MANAGER
+}
+
+enum NotificationType {
+  SYSTEM
+  SHIFT_REQUEST
+  REMINDER
+  GENERAL
+}
+
+enum SubscriptionPlan {
+  TRIAL
+  PRO
+  ENTERPRISE
+}
+
+enum RequestType {
+  SWAP
+  DROP
+  PICKUP
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
