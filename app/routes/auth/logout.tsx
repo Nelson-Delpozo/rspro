@@ -1,9 +1,13 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
+import { destroyUserSession } from "~/utils/session.server";
 
-import { logout } from "~/session.server";
+export async function action({ request }: { request: Request }) {
+  return destroyUserSession(request);
+}
 
-export const action = async ({ request }: ActionFunctionArgs) =>
-  logout(request);
-
-export const loader = async () => redirect("/");
+export default function LogoutPage() {
+  return (
+    <form method="post">
+      <button type="submit">Log Out</button>
+    </form>
+  );
+}
