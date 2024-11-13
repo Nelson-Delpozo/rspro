@@ -37,6 +37,8 @@ model User {
   initiatedRequests  ShiftRequest[] @relation("RequestInitiator")
   targetedRequests   ShiftRequest[] @relation("RequestTarget")
   managedRequests    ShiftRequest[] @relation("RequestManager")
+  resetToken          String?  // Token for password reset
+  resetTokenExpiresAt DateTime? // Expiry for the reset token
   notificationsSent  Notification[] @relation("Sender")
   notificationsReceived Notification[] @relation("Recipient")
 }
