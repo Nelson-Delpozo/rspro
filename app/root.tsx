@@ -1,5 +1,5 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction, LoaderArgs } from "@remix-run/node";
+import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -9,8 +9,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import { getUser } from "~/routes/session.server";
 import stylesheet from "~/tailwind.css";
-import { getUser } from "~/utils/session.server";
 
 // Add links for stylesheets
 export const links: LinksFunction = () => [
@@ -19,13 +19,12 @@ export const links: LinksFunction = () => [
 ];
 
 // Loader to fetch user data
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: { request: Request }) => {
   const user = await getUser(request);
   return new Response(JSON.stringify({ user }), {
     headers: { "Content-Type": "application/json" },
   });
 };
-
 
 // Main App component
 export default function App() {
