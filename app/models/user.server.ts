@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
-import { prisma } from '~/db.server'; // Assuming we have a Prisma client setup
+import { prisma } from "~/db.server";
 
 const SALT_ROUNDS = 10;
 
@@ -108,23 +108,23 @@ export async function registerEmployeeWithToken({
   return user;
 }
 
-// User Login
-export async function loginUser(email: string, password: string) {
+// Verify Login
+export async function verifyLogin(email: string, password: string) {
   const user = await prisma.user.findUnique({
     where: { email },
   });
 
   if (!user) {
-    throw new Error('User not found');
+    return null;
   }
 
   const isValid = await isPasswordValid(password, user.password);
 
   if (!isValid) {
-    throw new Error('Invalid password');
+    return null;
   }
 
-  return user; // You can return user details or session token as needed
+  return user;
 }
 
 // Initiate Password Reset
@@ -187,11 +187,31 @@ export async function getUserById(userId: string) {
   return prisma.user.findUnique({
     where: { id: userId },
   });
-} 
+}
 
 // Utility Function to Fetch All Users by Restaurant ID
 export async function getUsersByRestaurant(restaurantId: string) {
   return prisma.user.findMany({
     where: { restaurantId },
   });
-}
+} 
+
+// Utility Function to Fetch Users by Role
+export async function getUsersByRole({
+  restaurantId,
+  role,
+}: {
+  restaurantId: string;
+  role: Role;
+}) {
+  return prisma.user.findMany({
+    where: {
+      restaurantId,
+      roles: {
+        has: role,
+      },
+    },
+  });
+} 
+
+export type Role = 'MANAGER' | 'SERVER' | 'BARTENDER' | 'BUSSER' | 'KITCHEN' | 'BARBACK' | 'EXPO';

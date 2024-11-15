@@ -3,61 +3,106 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 
-import { createUser, getUserByEmail } from "~/models/user.server";
+import { prisma } from "~/db.server";
+import { createRestaurantWithManager, registerEmployeeWithToken } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
   if (userId) return redirect("/");
-  return json({});
+  return new Response(JSON.stringify({}), {
+    headers: { "Content-Type": "application/json" },
+  });
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/dashboard");
+  const isManagerRegistration = formData.get("isManagerRegistration") === "true";
+  const token = formData.get("token");
+  const restaurantName = formData.get("restaurantName");
+  const managerName = formData.get("managerName");
+  const phoneNumber = formData.get("phoneNumber") as string | undefined;
 
-  if (!validateEmail(email)) {
-    return json(
-      { errors: { email: "Email is invalid", password: null } },
-      { status: 400 },
+  // Validate Email
+  if (typeof email !== "string" || !validateEmail(email)) {
+    return new Response(
+      JSON.stringify({ errors: { email: "Email is invalid", password: null } }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
     );
   }
 
+  // Validate Password
   if (typeof password !== "string" || password.length === 0) {
-    return json(
-      { errors: { email: null, password: "Password is required" } },
-      { status: 400 },
+    return new Response(
+      JSON.stringify({ errors: { email: null, password: "Password is required" } }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
     );
   }
-
   if (password.length < 8) {
-    return json(
-      { errors: { email: null, password: "Password is too short" } },
-      { status: 400 },
+    return new Response(
+      JSON.stringify({ errors: { email: null, password: "Password is too short" } }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
     );
   }
 
-  const existingUser = await getUserByEmail(email);
+  // Check for existing user
+  const existingUser = await prisma.user.findUnique({ where: { email: email as string } });
   if (existingUser) {
-    return json(
-      {
-        errors: {
-          email: "A user already exists with this email",
-          password: null,
-        },
-      },
-      { status: 400 },
+    return new Response(
+      JSON.stringify({ errors: { email: "A user already exists with this email", password: null } }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
     );
   }
 
-  const user = await createUser(email, password);
+  let user;
+  if (isManagerRegistration) {
+    // Register a new restaurant and manager
+    if (typeof restaurantName !== "string" || typeof managerName !== "string") {
+      return new Response(
+        JSON.stringify({ errors: { general: "Missing required restaurant or manager information" } }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    const { manager } = await createRestaurantWithManager({
+      restaurantName,
+      managerEmail: email,
+      password,
+      managerName,
+      phoneNumber,
+    });
+    user = manager;
+  } else if (typeof token === "string") {
+    // Register a new employee using a token
+    if (typeof managerName !== "string") {
+      return new Response(
+        JSON.stringify({ errors: { general: "Manager name is required for employee registration" } }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    try {
+      user = await registerEmployeeWithToken({ email, password, name: managerName, token, phoneNumber });
+    } catch (error) {
+      return new Response(
+        JSON.stringify({ errors: { general: (error as Error).message } }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+  } else {
+    return new Response(
+      JSON.stringify({ errors: { general: "Invalid registration flow" } }),
+      { status: 400, headers: { "Content-Type": "application/json" } }
+    );
+  }
 
   return createUserSession({
     redirectTo,
