@@ -26,7 +26,7 @@ export default function DashboardIndex() {
       {isManager ? (
         <>
           <h1 className="mb-4 text-3xl font-bold">
-            Manager Dashboard: {user.name}!
+            Manager Dashboard: {user.name}
           </h1>
           <p className="mb-6 text-lg">
             Manage Shifts, Employees, Schedules, and Account Settings
@@ -84,7 +84,7 @@ export default function DashboardIndex() {
       ) : (
         <>
           <h1 className="mb-4 text-3xl font-bold">
-            Employee Dashboard: {user.name}!
+            Employee Dashboard: {user.name}
           </h1>
           <p className="mb-6 text-lg">
             Manage Shifts, Availability, Notifications, and View Schedule
