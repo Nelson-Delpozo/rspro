@@ -40,7 +40,7 @@ export default function AvailabilityPage() {
             Welcome, {user.name}. Here you can view and update your availability.
           </p>
           {/* Placeholder content - Add availability viewing/updating functionality for employees */}
-          <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600">
             Back to Dashboard
           </Link>
         </>

@@ -29,7 +29,7 @@ export default function SchedulePage() {
             Welcome, {user.name}. Here you can create, edit, and manage schedules for your employees.
           </p>
           {/* Placeholder content - Add schedule management functionality here */}
-          <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600">
             Back to Dashboard
           </Link>
         </>
@@ -40,7 +40,7 @@ export default function SchedulePage() {
             Welcome, {user.name}. Here you can view your work schedule.
           </p>
           {/* Placeholder content - Add schedule viewing functionality for employees */}
-          <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600">
             Back to Dashboard
           </Link>
         </>

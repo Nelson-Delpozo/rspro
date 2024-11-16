@@ -26,11 +26,10 @@ export default function DashboardIndex() {
       {isManager ? (
         <>
           <h1 className="mb-4 text-3xl font-bold">
-            Welcome to Your Dashboard, {user.name}!
+            Manager Dashboard: {user.name}!
           </h1>
           <p className="mb-6 text-lg">
-            Here you can manage all aspects of your restaurant operations. Use
-            the links below to get started.
+            Manage Shifts, Employees, Schedules, and Account Settings
           </p>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -85,10 +84,10 @@ export default function DashboardIndex() {
       ) : (
         <>
           <h1 className="mb-4 text-3xl font-bold">
-            Welcome to Your Employee Dashboard, {user.name}!
+            Employee Dashboard: {user.name}!
           </h1>
           <p className="mb-6 text-lg">
-            Here you can manage your shifts and availability.
+            Manage Shifts, Availability, Notifications, and View Schedule
           </p>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -115,6 +114,17 @@ export default function DashboardIndex() {
                 Set Availability
               </span>
             </Link>
+            <Link
+              to="/dashboard/schedule"
+              className="flex transform items-center rounded-md border border-gray-300 p-3 shadow-sm transition-transform hover:scale-105 focus:ring-2 focus:ring-purple-500"
+            >
+              <div className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-purple-500 text-lg font-semibold text-white">
+                S
+              </div>
+              <span className="text-lg font-medium text-gray-800">
+                View Schedule
+              </span>
+            </Link>
 
             <Link
               to="/dashboard/notifications"
@@ -125,18 +135,6 @@ export default function DashboardIndex() {
               </div>
               <span className="text-lg font-medium text-gray-800">
                 Notifications
-              </span>
-            </Link>
-
-            <Link
-              to="/dashboard/schedule"
-              className="flex transform items-center rounded-md border border-gray-300 p-3 shadow-sm transition-transform hover:scale-105 focus:ring-2 focus:ring-purple-500"
-            >
-              <div className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-purple-500 text-lg font-semibold text-white">
-                S
-              </div>
-              <span className="text-lg font-medium text-gray-800">
-                View Schedule
               </span>
             </Link>
           </div>

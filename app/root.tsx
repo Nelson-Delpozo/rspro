@@ -47,7 +47,7 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full bg-white text-gray-900 flex flex-col min-h-screen">
-        <header className="bg-blue-700 text-white p-4">
+        <header className="bg-blue-900 text-white p-4">
           <div className="container mx-auto flex justify-between items-center">
             <Link to="/" className="text-xl font-bold">
               RS-PRO
@@ -65,7 +65,7 @@ export default function App() {
         <div className="flex-grow">
           <Outlet />
         </div>
-        <footer className="bg-blue-700 text-white p-4">
+        <footer className="bg-blue-900 text-white p-4">
           <div className="container mx-auto flex justify-between items-center">
             <p>&copy; {new Date().getFullYear()} RS PRO</p>
             <div className="flex space-x-4">

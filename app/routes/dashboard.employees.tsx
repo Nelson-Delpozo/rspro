@@ -24,7 +24,7 @@ export default function EmployeesPage() {
         Welcome, {user.name}. Here you can add, edit, and manage your employees.
       </p>
       {/* Placeholder content - Add employee management functionality here */}
-      <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Back to Dashboard</Link>
+      <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600">Back to Dashboard</Link>
     </div>
   );
 }
