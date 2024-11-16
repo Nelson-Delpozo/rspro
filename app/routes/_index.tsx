@@ -1,5 +1,22 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { Link } from "@remix-run/react";
+
+import { getUserId } from "~/session.server";
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const userId = await getUserId(request);
+  if (userId) {
+    // If the user is already logged in, redirect them to the dashboard
+    return redirect("/dashboard");
+  }
+
+  // Continue to render the landing page if the user is not logged in
+  return new Response(null, {
+    status: 200,
+  });
+};
+
 
 export const meta: MetaFunction = () => [{ title: "Welcome to RS-PRO" }];
 
