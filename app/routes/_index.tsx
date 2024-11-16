@@ -34,13 +34,13 @@ export default function Index() {
         <div className="space-y-4">
           <Link
             to="/join"
-            className="block w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-400"
+            className="block w-full rounded bg-blue-700 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-700"
           >
             Create an Account
           </Link>
           <Link
             to="/login"
-            className="block w-full rounded border border-blue-500 px-4 py-2 text-blue-500 hover:bg-blue-600 hover:text-white focus:bg-blue-400"
+            className="block w-full rounded border border-blue-500 px-4 py-2 text-blue-700 hover:bg-blue-600 hover:text-white focus:bg-blue-400"
           >
             Log In
           </Link>

@@ -7,6 +7,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useFetcher,
+  useLoaderData,
 } from "@remix-run/react";
 
 import { getUser } from "~/routes/session.server";
@@ -28,6 +30,15 @@ export const loader = async ({ request }: { request: Request }) => {
 
 // Main App component
 export default function App() {
+  const fetcher = useFetcher();
+  const { user } = useLoaderData<{
+    user: { id: string; name: string; email: string };
+  }>();
+
+  const handleLogout = () => {
+    fetcher.submit(null, { action: "/logout", method: "post" });
+  };
+
   return (
     <html lang="en" className="h-full">
       <head>
@@ -37,6 +48,19 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full bg-gray-100 text-gray-900">
+        <header className="bg-blue-700 p-4 text-white">
+          <div className="container mx-auto flex items-center justify-between">
+            <h1 className="text-xl font-bold">RS-PRO</h1>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="rounded bg-red-500 px-4 py-2 hover:bg-red-600 focus:bg-red-400"
+              >
+                Logout
+              </button>
+            ) : null}
+          </div>
+        </header>
         <Outlet />
         <ScrollRestoration />
         <Scripts />

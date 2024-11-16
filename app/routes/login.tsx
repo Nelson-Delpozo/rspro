@@ -149,7 +149,7 @@ export default function LoginPage() {
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <button
             type="submit"
-            className="w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-400"
+            className="w-full rounded bg-blue-700 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-400"
           >
             Log in
           </button>
@@ -159,7 +159,7 @@ export default function LoginPage() {
                 id="remember"
                 name="remember"
                 type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-700"
               />
               <label
                 htmlFor="remember"
@@ -171,7 +171,7 @@ export default function LoginPage() {
             <div className="text-center text-sm text-gray-500">
               Don&apos;t have an account?{" "}
               <Link
-                className="text-blue-500 underline"
+                className="text-blue-700 underline"
                 to={{
                   pathname: "/join",
                   search: searchParams.toString(),

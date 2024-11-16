@@ -225,6 +225,8 @@ export default function Join() {
                   <input
                     id="restaurantName"
                     ref={restaurantNameRef}
+                    // eslint-disable-next-line jsx-a11y/no-autofocus
+                    autoFocus={true}
                     name="restaurantName"
                     type="text"
                     required={isManagerRegistration}
@@ -302,8 +304,6 @@ export default function Join() {
                     ref={emailRef}
                     id="email"
                     required
-                    // eslint-disable-next-line jsx-a11y/no-autofocus
-                    autoFocus={true}
                     name="email"
                     type="email"
                     autoComplete="email"
@@ -391,6 +391,8 @@ export default function Join() {
                   <input
                     id="managerName"
                     ref={managerNameRef}
+                    // eslint-disable-next-line jsx-a11y/no-autofocus
+                    autoFocus={true}
                     name="managerName"
                     type="text"
                     required
@@ -411,8 +413,6 @@ export default function Join() {
                     ref={emailRef}
                     id="email"
                     required
-                    // eslint-disable-next-line jsx-a11y/no-autofocus
-                    autoFocus={true}
                     name="email"
                     type="email"
                     autoComplete="email"
@@ -515,7 +515,7 @@ export default function Join() {
               type="checkbox"
               checked={isManagerRegistration}
               onChange={(e) => setIsManagerRegistration(e.target.checked)}
-              className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              className="h-4 w-4 rounded border-gray-300 text-blue-700 focus:ring-blue-700"
             />
             <label
               htmlFor="isManagerRegistration"
@@ -528,7 +528,7 @@ export default function Join() {
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <button
             type="submit"
-            className="w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-400"
+            className="w-full rounded bg-blue-700 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-700"
           >
             Create Account
           </button>
@@ -536,7 +536,7 @@ export default function Join() {
             <div className="text-center text-sm text-gray-500">
               Already have an account?{" "}
               <Link
-                className="text-blue-500 underline"
+                className="text-blue-700 underline"
                 to={{
                   pathname: "/login",
                   search: searchParams.toString(),
