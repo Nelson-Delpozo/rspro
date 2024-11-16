@@ -1,4 +1,4 @@
-// Directory: app/routes/dashboard/shifts.tsx
+// Directory: app/routes/dashboard/availability.tsx
 
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
@@ -14,7 +14,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   return { user };
 };
 
-export default function ShiftsPage() {
+export default function AvailabilityPage() {
   const { user } = useLoaderData<{ user: { name: string; roles: string[] } }>();
 
   // Conditional rendering based on role
@@ -24,22 +24,22 @@ export default function ShiftsPage() {
     <div className="container mx-auto p-6 text-center">
       {isManager ? (
         <>
-          <h2 className="mb-4 text-2xl font-bold">Manage Shifts</h2>
+          <h2 className="mb-4 text-2xl font-bold">Manage Employee Availability</h2>
           <p className="mb-4">
-            Welcome, {user.name}. Here you can create, edit, and assign shifts for your employees.
+            Welcome, {user.name}. Here you can view and manage availability for your employees.
           </p>
-          {/* Placeholder content - Add shift management functionality here */}
+          {/* Placeholder content - Add availability management functionality here */}
           <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Back to Dashboard
           </Link>
         </>
       ) : (
         <>
-          <h2 className="mb-4 text-2xl font-bold">View Your Shifts</h2>
+          <h2 className="mb-4 text-2xl font-bold">View Your Availability</h2>
           <p className="mb-4">
-            Welcome, {user.name}. Here you can view your upcoming shifts and manage your availability.
+            Welcome, {user.name}. Here you can view and update your availability.
           </p>
-          {/* Placeholder content - Add shift viewing functionality for employees */}
+          {/* Placeholder content - Add availability viewing/updating functionality for employees */}
           <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
             Back to Dashboard
           </Link>
