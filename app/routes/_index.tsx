@@ -40,7 +40,7 @@ export default function Index() {
           </Link>
           <Link
             to="/login"
-            className="block w-full rounded border border-blue-500 px-4 py-2 text-blue-700 hover:bg-blue-600 hover:text-white focus:bg-blue-400"
+            className="block w-full rounded border border-blue-700 px-4 py-2 text-blue-700 hover:bg-blue-600 hover:text-white focus:bg-blue-400"
           >
             Log In
           </Link>

@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
   useFetcher,
   useLoaderData,
+  Link,
 } from "@remix-run/react";
 
 import { getUser } from "~/routes/session.server";
@@ -31,9 +32,7 @@ export const loader = async ({ request }: { request: Request }) => {
 // Main App component
 export default function App() {
   const fetcher = useFetcher();
-  const { user } = useLoaderData<{
-    user: { id: string; name: string; email: string };
-  }>();
+  const { user } = useLoaderData<{ user: { id: string; name: string; email: string } | null }>();
 
   const handleLogout = () => {
     fetcher.submit(null, { action: "/logout", method: "post" });
@@ -47,21 +46,36 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-gray-100 text-gray-900">
-        <header className="bg-blue-700 p-4 text-white">
-          <div className="container mx-auto flex items-center justify-between">
-            <h1 className="text-xl font-bold">RS-PRO</h1>
-            {user ? (
-              <button
+      <body className="h-full bg-gray-100 text-gray-900 flex flex-col min-h-screen">
+        <header className="bg-blue-700 text-white p-4">
+          <div className="container mx-auto flex justify-between items-center">
+            <Link to="/" className="text-xl font-bold">
+              RS-PRO
+            </Link>
+            {user ? <button
                 onClick={handleLogout}
-                className="rounded bg-red-500 px-4 py-2 hover:bg-red-600 focus:bg-red-400"
+                className="bg-red-700 px-4 py-2 rounded hover:bg-red-600 focus:bg-red-400"
               >
                 Logout
-              </button>
-            ) : null}
+              </button> : null}
           </div>
         </header>
-        <Outlet />
+        <div className="flex-grow">
+          <Outlet />
+        </div>
+        <footer className="bg-blue-700 text-white p-4 mt-auto w-full">
+          <div className="container mx-auto flex justify-between items-center">
+            <p>&copy; {new Date().getFullYear()} RS PRO</p>
+            <div className="flex space-x-4">
+              <Link to="/about" className="hover:underline">
+                About
+              </Link>
+              <Link to="/contact" className="hover:underline">
+                Contact
+              </Link>
+            </div>
+          </div>
+        </footer>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
