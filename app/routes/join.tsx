@@ -189,11 +189,11 @@ export default function Join() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
-  const phoneNumberRef = useRef<HTMLInputElement>(null);
   const userPhoneNumberRef = useRef<HTMLInputElement>(null);
   const restaurantNameRef = useRef<HTMLInputElement>(null);
   const managerNameRef = useRef<HTMLInputElement>(null);
   const locationRef = useRef<HTMLInputElement>(null);
+  const phoneNumberRef = useRef<HTMLInputElement>(null);
   const [isManagerRegistration, setIsManagerRegistration] = useState(false);
 
   useEffect(() => {
@@ -212,144 +212,6 @@ export default function Join() {
     <div className="flex min-h-full flex-col justify-center">
       <div className="mx-auto w-full max-w-md px-8">
         <Form method="post" className="space-y-6">
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email address
-            </label>
-            <div className="mt-1">
-              <input
-                ref={emailRef}
-                id="email"
-                required
-                // eslint-disable-next-line jsx-a11y/no-autofocus
-                autoFocus={true}
-                name="email"
-                type="email"
-                autoComplete="email"
-                aria-invalid={actionData?.errors?.email ? true : undefined}
-                aria-describedby="email-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-              />
-              {actionData?.errors?.email ? (
-                <div className="pt-1 text-red-700" id="email-error">
-                  {actionData.errors.email}
-                </div>
-              ) : null}
-            </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <div className="mt-1">
-              <input
-                id="password"
-                ref={passwordRef}
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                aria-invalid={actionData?.errors?.password ? true : undefined}
-                aria-describedby="password-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-              />
-              {actionData?.errors?.password ? (
-                <div className="pt-1 text-red-700" id="password-error">
-                  {actionData.errors.password}
-                </div>
-              ) : null}
-            </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Confirm Password
-            </label>
-            <div className="mt-1">
-              <input
-                id="confirmPassword"
-                ref={confirmPasswordRef}
-                name="confirmPassword"
-                type="password"
-                autoComplete="new-password"
-                aria-invalid={
-                  actionData?.errors?.confirmPassword ? true : undefined
-                }
-                aria-describedby="confirm-password-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-              />
-              {actionData?.errors?.confirmPassword ? (
-                <div className="pt-1 text-red-700" id="confirm-password-error">
-                  {actionData.errors.confirmPassword}
-                </div>
-              ) : null}
-            </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="phoneNumber"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Restaurant Phone Number
-            </label>
-            <div className="mt-1">
-              <input
-                id="phoneNumber"
-                ref={phoneNumberRef}
-                name="phoneNumber"
-                type="text"
-                autoComplete="tel"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="userPhoneNumber"
-              className="block text-sm font-medium text-gray-700"
-            >
-              User Phone Number
-            </label>
-            <div className="mt-1">
-              <input
-                id="userPhoneNumber"
-                ref={userPhoneNumberRef}
-                name="userPhoneNumber"
-                type="text"
-                autoComplete="tel"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center">
-            <input
-              id="isManagerRegistration"
-              name="isManagerRegistration"
-              type="checkbox"
-              checked={isManagerRegistration}
-              onChange={(e) => setIsManagerRegistration(e.target.checked)}
-              className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-            />
-            <label
-              htmlFor="isManagerRegistration"
-              className="ml-2 block text-sm text-gray-900"
-            >
-              Register as a Restaurant Manager
-            </label>
-          </div>
-
           {isManagerRegistration ? (
             <>
               <div>
@@ -366,6 +228,44 @@ export default function Join() {
                     name="restaurantName"
                     type="text"
                     required={isManagerRegistration}
+                    className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="location"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Location
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="location"
+                    ref={locationRef}
+                    name="location"
+                    type="text"
+                    required={isManagerRegistration}
+                    className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="phoneNumber"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Phone Number
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="phoneNumber"
+                    ref={phoneNumberRef}
+                    name="phoneNumber"
+                    type="text"
+                    autoComplete="tel"
                     className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
                   />
                 </div>
@@ -392,24 +292,238 @@ export default function Join() {
 
               <div>
                 <label
-                  htmlFor="location"
+                  htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Location
+                  Email address
                 </label>
                 <div className="mt-1">
                   <input
-                    id="location"
-                    ref={locationRef}
-                    name="location"
+                    ref={emailRef}
+                    id="email"
+                    required
+                    // eslint-disable-next-line jsx-a11y/no-autofocus
+                    autoFocus={true}
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    aria-invalid={actionData?.errors?.email ? true : undefined}
+                    aria-describedby="email-error"
+                    className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                  />
+                  {actionData?.errors?.email ? (
+                    <div className="pt-1 text-red-700" id="email-error">
+                      {actionData.errors.email}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="password"
+                    ref={passwordRef}
+                    name="password"
+                    type="password"
+                    autoComplete="new-password"
+                    aria-invalid={
+                      actionData?.errors?.password ? true : undefined
+                    }
+                    aria-describedby="password-error"
+                    className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                  />
+                  {actionData?.errors?.password ? (
+                    <div className="pt-1 text-red-700" id="password-error">
+                      {actionData.errors.password}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Confirm Password
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="confirmPassword"
+                    ref={confirmPasswordRef}
+                    name="confirmPassword"
+                    type="password"
+                    autoComplete="new-password"
+                    aria-invalid={
+                      actionData?.errors?.confirmPassword ? true : undefined
+                    }
+                    aria-describedby="confirm-password-error"
+                    className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                  />
+                  {actionData?.errors?.confirmPassword ? (
+                    <div
+                      className="pt-1 text-red-700"
+                      id="confirm-password-error"
+                    >
+                      {actionData.errors.confirmPassword}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <label
+                  htmlFor="managerName"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Name
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="managerName"
+                    ref={managerNameRef}
+                    name="managerName"
                     type="text"
-                    required={isManagerRegistration}
+                    required
+                    className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email address
+                </label>
+                <div className="mt-1">
+                  <input
+                    ref={emailRef}
+                    id="email"
+                    required
+                    // eslint-disable-next-line jsx-a11y/no-autofocus
+                    autoFocus={true}
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    aria-invalid={actionData?.errors?.email ? true : undefined}
+                    aria-describedby="email-error"
+                    className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                  />
+                  {actionData?.errors?.email ? (
+                    <div className="pt-1 text-red-700" id="email-error">
+                      {actionData.errors.email}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="password"
+                    ref={passwordRef}
+                    name="password"
+                    type="password"
+                    autoComplete="new-password"
+                    aria-invalid={
+                      actionData?.errors?.password ? true : undefined
+                    }
+                    aria-describedby="password-error"
+                    className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                  />
+                  {actionData?.errors?.password ? (
+                    <div className="pt-1 text-red-700" id="password-error">
+                      {actionData.errors.password}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Confirm Password
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="confirmPassword"
+                    ref={confirmPasswordRef}
+                    name="confirmPassword"
+                    type="password"
+                    autoComplete="new-password"
+                    aria-invalid={
+                      actionData?.errors?.confirmPassword ? true : undefined
+                    }
+                    aria-describedby="confirm-password-error"
+                    className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                  />
+                  {actionData?.errors?.confirmPassword ? (
+                    <div
+                      className="pt-1 text-red-700"
+                      id="confirm-password-error"
+                    >
+                      {actionData.errors.confirmPassword}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="userPhoneNumber"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Phone Number
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="userPhoneNumber"
+                    ref={userPhoneNumberRef}
+                    name="userPhoneNumber"
+                    type="text"
+                    autoComplete="tel"
                     className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
                   />
                 </div>
               </div>
             </>
-          ) : null}
+          )}
+
+          <div className="flex items-center">
+            <input
+              id="isManagerRegistration"
+              name="isManagerRegistration"
+              type="checkbox"
+              checked={isManagerRegistration}
+              onChange={(e) => setIsManagerRegistration(e.target.checked)}
+              className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            />
+            <label
+              htmlFor="isManagerRegistration"
+              className="ml-2 block text-sm text-gray-900"
+            >
+              Register as a Restaurant Manager
+            </label>
+          </div>
 
           <input type="hidden" name="redirectTo" value={redirectTo} />
           <button
