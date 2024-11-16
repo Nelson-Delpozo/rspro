@@ -11,7 +11,7 @@
   "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
   "setup": "prisma generate && prisma migrate deploy && prisma db seed",
   "start": "remix-serve ./build/index.js",
-  "postinstall": "prisma generate && prisma migrate deploy",
+  "postinstall": "prisma generate && prisma migrate deploy && prisma db seed",
   "vercel-build": "npm run build && prisma migrate deploy && prisma generate",
   "start:mocks": "NODE_OPTIONS=\"--import ./mocks/index.js\" remix-serve ./build/index.js",
   "test": "vitest",
