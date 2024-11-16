@@ -18,16 +18,14 @@ export default function ShiftsPage() {
   const { user } = useLoaderData<{ user: { name: string } }>();
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 text-center">
       <h2 className="mb-4 text-2xl font-bold">Manage Shifts</h2>
       <p className="mb-4">
         Welcome, {user.name}. Here you can create, edit, and assign shifts for
         your employees.
       </p>
       {/* Placeholder content - Add shift management functionality here */}
-      <Link to="/dashboard" className="text-blue-600 hover:underline">
-        Back to Dashboard
-      </Link>
+      <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Back to Dashboard</Link>
     </div>
   );
 }

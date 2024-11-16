@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
 
 import { getUser } from "~/session.server";
 
@@ -17,30 +17,54 @@ export default function DashboardIndex() {
   const { user } = useLoaderData<{ user: { name: string } }>();
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Welcome to Your Dashboard, {user.name}!</h1>
-      <p className="text-lg mb-6">Here you can manage all aspects of your restaurant operations. Use the links below to get started.</p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="container mx-auto p-6 text-center">
+      <h1 className="mb-4 text-3xl font-bold">
+        Welcome to Your Dashboard, {user.name}!
+      </h1>
+      <p className="mb-6 text-lg">
+        Here you can manage all aspects of your restaurant operations. Use the
+        links below to get started.
+      </p>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <Link
           to="/dashboard/employees"
-          className="block p-6 rounded-lg shadow-lg bg-blue-500 text-white text-center hover:bg-blue-600"
+          className="flex transform items-center rounded-md border border-gray-300 p-3 shadow-sm transition-transform hover:scale-105 focus:ring-2 focus:ring-blue-500"
         >
-          Manage Employees
+          <div className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-blue-500 text-lg font-semibold text-white">
+            E
+          </div>
+          <span className="text-lg font-medium text-gray-800">
+            Manage Employees
+          </span>
         </Link>
+
         <Link
           to="/dashboard/shifts"
-          className="block p-6 rounded-lg shadow-lg bg-green-500 text-white text-center hover:bg-green-600"
+          className="flex transform items-center rounded-md border border-gray-300 p-3 shadow-sm transition-transform hover:scale-105 focus:ring-2 focus:ring-green-500"
         >
-          Manage Shifts
+          <div className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-green-500 text-lg font-semibold text-white">
+            S
+          </div>
+          <span className="text-lg font-medium text-gray-800">
+            Manage Shifts
+          </span>
         </Link>
+
         <Link
           to="/dashboard/settings"
-          className="block p-6 rounded-lg shadow-lg bg-yellow-500 text-white text-center hover:bg-yellow-600"
+          className="flex transform items-center rounded-md border border-gray-300 p-3 shadow-sm transition-transform hover:scale-105 focus:ring-2 focus:ring-yellow-500"
         >
-          Account Settings
+          <div className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-yellow-500 text-lg font-semibold text-white">
+            A
+          </div>
+          <span className="text-lg font-medium text-gray-800">
+            Account Settings
+          </span>
         </Link>
       </div>
+
+      <Outlet />
     </div>
   );
 }

@@ -18,16 +18,11 @@ export default function SettingsPage() {
   const { user } = useLoaderData<{ user: { name: string } }>();
 
   return (
-    <div className="container mx-auto p-6">
-      <h2 className="mb-4 text-2xl font-bold">Account Settings</h2>
-      <p className="mb-4">
-        Welcome, {user.name}. Here you can manage your account settings and
-        preferences.
-      </p>
+    <div className="container mx-auto p-6 text-center">
+      <h2 className="text-2xl font-bold mb-4">Account Settings</h2>
+      <p className="mb-4">Welcome, {user.name}. Here you can manage your account settings and preferences.</p>
       {/* Placeholder content - Add account settings management functionality here */}
-      <Link to="/dashboard" className="text-blue-600 hover:underline">
-        Back to Dashboard
-      </Link>
+      <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Back to Dashboard</Link>
     </div>
   );
 }
