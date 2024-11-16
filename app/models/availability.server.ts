@@ -1,4 +1,4 @@
-import { prisma } from '~/db.server'; // Assuming we have a Prisma client setup
+import { prisma } from "~/db.server"; // Assuming we have a Prisma client setup
 
 // Create Availability Record
 export async function createAvailability({
@@ -72,7 +72,7 @@ export async function getAvailabilityByUser({
         lte: endDate,
       },
     },
-    orderBy: { date: 'asc' },
+    orderBy: { date: "asc" },
   });
 }
 
@@ -94,6 +94,6 @@ export async function getAvailabilityByRestaurant({
         lte: endDate,
       },
     },
-    orderBy: { date: 'asc' },
+    orderBy: { date: "asc" },
   });
 }

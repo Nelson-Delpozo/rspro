@@ -1,5 +1,5 @@
-import bcrypt from 'bcrypt';
-import { v4 as uuidv4 } from 'uuid';
+import bcrypt from "bcrypt";
+import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
 
@@ -12,7 +12,10 @@ async function hashPassword(password: string): Promise<string> {
 }
 
 // Validate Password
-async function isPasswordValid(plainPassword: string, hashedPassword: string): Promise<boolean> {
+async function isPasswordValid(
+  plainPassword: string,
+  hashedPassword: string,
+): Promise<boolean> {
   return bcrypt.compare(plainPassword, hashedPassword);
 }
 
@@ -24,7 +27,7 @@ export async function createRestaurantWithManager({
   managerEmail,
   password,
   managerName,
-  managerPhoneNumber,
+  userPhoneNumber,
 }: {
   restaurantName: string;
   phoneNumber?: string;
@@ -32,7 +35,7 @@ export async function createRestaurantWithManager({
   managerEmail: string;
   password: string;
   managerName: string;
-  managerPhoneNumber?: string;
+  userPhoneNumber?: string;
 }) {
   const hashedPassword = await hashPassword(password);
 
@@ -51,8 +54,8 @@ export async function createRestaurantWithManager({
         email: managerEmail,
         password: hashedPassword,
         name: managerName,
-        phoneNumber: managerPhoneNumber,
-        roles: ['MANAGER'],
+        phoneNumber: userPhoneNumber,
+        roles: ["MANAGER"],
         restaurantId: restaurant.id,
       },
     });
@@ -81,7 +84,7 @@ export async function registerEmployeeWithToken({
   });
 
   if (!invitation || invitation.expiresAt < new Date()) {
-    throw new Error('Invalid or expired invitation token');
+    throw new Error("Invalid or expired invitation token");
   }
 
   // Hash the password
@@ -134,7 +137,7 @@ export async function initiatePasswordReset(email: string) {
   });
 
   if (!user) {
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 
   const resetToken = uuidv4();
@@ -165,7 +168,7 @@ export async function resetPassword(token: string, newPassword: string) {
   });
 
   if (!user) {
-    throw new Error('Invalid or expired reset token');
+    throw new Error("Invalid or expired reset token");
   }
 
   const hashedPassword = await hashPassword(newPassword);
@@ -194,7 +197,7 @@ export async function getUsersByRestaurant(restaurantId: string) {
   return prisma.user.findMany({
     where: { restaurantId },
   });
-} 
+}
 
 // Utility Function to Fetch Users by Role
 export async function getUsersByRole({
@@ -212,6 +215,13 @@ export async function getUsersByRole({
       },
     },
   });
-} 
+}
 
-export type Role = 'MANAGER' | 'SERVER' | 'BARTENDER' | 'BUSSER' | 'KITCHEN' | 'BARBACK' | 'EXPO';
+export type Role =
+  | "MANAGER"
+  | "SERVER"
+  | "BARTENDER"
+  | "BUSSER"
+  | "KITCHEN"
+  | "BARBACK"
+  | "EXPO";

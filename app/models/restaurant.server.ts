@@ -1,4 +1,4 @@
-import { prisma } from '~/db.server'; // Assuming we have a Prisma client setup
+import { prisma } from "~/db.server"; // Assuming we have a Prisma client setup
 
 // Create Restaurant
 export async function createRestaurant({

@@ -1,127 +1,140 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Role } from "@prisma/client";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  // Create a restaurant
-  const restaurant = await prisma.restaurant.create({
-    data: {
+  const hashedPassword = await bcrypt.hash("password", 10);
+
+  // Create Restaurants with Managers and Employees
+  const restaurants = [
+    {
       name: "Sunny Side Diner",
-      phoneNumber: "123-456-7890",
       location: "Austin, TX",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  });
-
-  // Create users (manager and employees)
-  const manager = await prisma.user.create({
-    data: {
-      email: "manager@sunnyside.com",
-      password: "hashed_password_1", // Use a real hash in production
-      name: "Jane Doe",
-      phoneNumber: "123-456-1234",
-      roles: ["MANAGER"],
-      restaurantId: restaurant.id,
-    },
-  });
-
-  const server = await prisma.user.create({
-    data: {
-      email: "server@sunnyside.com",
-      password: "hashed_password_2", // Use a real hash in production
-      name: "John Smith",
-      phoneNumber: "123-456-5678",
-      roles: ["SERVER"],
-      restaurantId: restaurant.id,
-    },
-  });
-
-  const expo = await prisma.user.create({
-    data: {
-      email: "expo@sunnyside.com",
-      password: "hashed_password_3", // Use a real hash in production
-      name: "Mary Johnson",
-      phoneNumber: "123-456-6789",
-      roles: ["EXPO"],
-      restaurantId: restaurant.id,
-    },
-  });
-
-  // Create a subscription
-  await prisma.subscription.create({
-    data: {
-      restaurantId: restaurant.id,
-      plan: "PRO",
-      trialEnds: new Date(new Date().setMonth(new Date().getMonth() + 3)), // 3-month trial
-      isActive: true,
-      createdAt: new Date(),
-    },
-  });
-
-  // Create shifts
-  const shift1 = await prisma.shift.create({
-    data: {
-      restaurantId: restaurant.id,
-      date: new Date("2024-11-14"),
-      startTime: new Date("2024-11-14T08:00:00Z"),
-      endTime: new Date("2024-11-14T16:00:00Z"),
-      role: "SERVER",
-    },
-  });
-
-  const shift2 = await prisma.shift.create({
-    data: {
-      restaurantId: restaurant.id,
-      date: new Date("2024-11-14"),
-      startTime: new Date("2024-11-14T12:00:00Z"),
-      endTime: new Date("2024-11-14T20:00:00Z"),
-      role: "EXPO",
-    },
-  });
-
-  // Create availability records
-  await prisma.availability.createMany({
-    data: [
-      {
-        restaurantId: restaurant.id,
-        userId: server.id,
-        date: new Date("2024-11-14"),
-        startTime: new Date("2024-11-14T08:00:00Z"),
-        endTime: new Date("2024-11-14T16:00:00Z"),
+      phoneNumber: "123-456-7890",
+      manager: {
+        email: "manager1@sunnyside.com",
+        name: "Jane Doe",
+        phoneNumber: "123-456-1234",
       },
-      {
-        restaurantId: restaurant.id,
-        userId: expo.id,
-        date: new Date("2024-11-14"),
-        startTime: new Date("2024-11-14T12:00:00Z"),
-        endTime: new Date("2024-11-14T20:00:00Z"),
+      employees: [
+        {
+          email: "server1@sunnyside.com",
+          name: "John Smith",
+          phoneNumber: "123-456-5678",
+          roles: [Role.SERVER],
+        },
+        {
+          email: "cook1@sunnyside.com",
+          name: "Mary Johnson",
+          phoneNumber: "123-456-6789",
+          roles: [Role.KITCHEN],
+        },
+        {
+          email: "expo1@sunnyside.com",
+          name: "James Brown",
+          phoneNumber: "123-456-7891",
+          roles: [Role.EXPO],
+        },
+      ],
+    },
+    {
+      name: "Green Garden Eatery",
+      location: "Denver, CO",
+      phoneNumber: "234-567-8901",
+      manager: {
+        email: "manager2@greengarden.com",
+        name: "Alice Green",
+        phoneNumber: "234-567-1234",
       },
-    ],
-  });
+      employees: [
+        {
+          email: "server2@greengarden.com",
+          name: "Tom White",
+          phoneNumber: "234-567-5678",
+          roles: [Role.SERVER],
+        },
+        {
+          email: "cook2@greengarden.com",
+          name: "Sarah Black",
+          phoneNumber: "234-567-6789",
+          roles: [Role.KITCHEN],
+        },
+        {
+          email: "bartender1@greengarden.com",
+          name: "Chris Blue",
+          phoneNumber: "234-567-7891",
+          roles: [Role.BARTENDER],
+        },
+      ],
+    },
+    {
+      name: "Ocean Breeze Cafe",
+      location: "San Francisco, CA",
+      phoneNumber: "345-678-9012",
+      manager: {
+        email: "manager3@oceanbreeze.com",
+        name: "Robert Ocean",
+        phoneNumber: "345-678-1234",
+      },
+      employees: [
+        {
+          email: "server3@oceanbreeze.com",
+          name: "Emily Wave",
+          phoneNumber: "345-678-5678",
+          roles: [Role.SERVER],
+        },
+        {
+          email: "cook3@oceanbreeze.com",
+          name: "Nina Shore",
+          phoneNumber: "345-678-6789",
+          roles: [Role.BARTENDER],
+        },
+        {
+          email: "host1@oceanbreeze.com",
+          name: "Liam Sand",
+          phoneNumber: "345-678-7891",
+          roles: [Role.MANAGER],
+        },
+      ],
+    },
+  ];
 
-  // Create invitations for employees
-  await prisma.invitation.createMany({
-    data: [
-      {
-        email: "new_server@sunnyside.com",
-        restaurantId: restaurant.id,
-        role: ["SERVER"],
-        token: "unique_token_1",
-        expiresAt: new Date(new Date().setDate(new Date().getDate() + 7)), // Expires in 7 days
-        createdAt: new Date(),
+  for (const restaurant of restaurants) {
+    const createdRestaurant = await prisma.restaurant.create({
+      data: {
+        name: restaurant.name,
+        location: restaurant.location,
+        phoneNumber: restaurant.phoneNumber,
       },
-      {
-        email: "new_expo@sunnyside.com",
-        restaurantId: restaurant.id,
-        role: ["EXPO"],
-        token: "unique_token_2",
-        expiresAt: new Date(new Date().setDate(new Date().getDate() + 7)), // Expires in 7 days
-        createdAt: new Date(),
+    });
+
+    const manager = restaurant.manager;
+    await prisma.user.create({
+      data: {
+        email: manager.email,
+        password: hashedPassword,
+        name: manager.name,
+        phoneNumber: manager.phoneNumber,
+        roles: [Role.MANAGER],
+        restaurantId: createdRestaurant.id,
       },
-    ],
-  });
+    });
+
+    for (const employee of restaurant.employees) {
+      await prisma.user.create({
+        data: {
+          email: employee.email,
+          password: hashedPassword,
+          name: employee.name,
+          phoneNumber: employee.phoneNumber,
+          roles: employee.roles,
+          restaurantId: createdRestaurant.id,
+        },
+      });
+    }
+  }
 
   console.log("Seeding completed!");
 }

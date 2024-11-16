@@ -1,6 +1,6 @@
-import { ShiftRole } from '@prisma/client';
+import { ShiftRole } from "@prisma/client";
 
-import { prisma } from '~/db.server'; // Assuming we have a Prisma client setup
+import { prisma } from "~/db.server"; // Assuming we have a Prisma client setup
 
 // Create Shift
 export async function createShift({

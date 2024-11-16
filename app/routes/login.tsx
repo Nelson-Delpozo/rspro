@@ -29,21 +29,25 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   if (!validateEmail(email)) {
     return new Response(
       JSON.stringify({ errors: { email: "Email is invalid", password: null } }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
+      { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
 
   if (typeof password !== "string" || password.length === 0) {
     return new Response(
-      JSON.stringify({ errors: { email: null, password: "Password is required" } }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
+      JSON.stringify({
+        errors: { email: null, password: "Password is required" },
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
 
   if (password.length < 8) {
     return new Response(
-      JSON.stringify({ errors: { email: null, password: "Password is too short" } }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
+      JSON.stringify({
+        errors: { email: null, password: "Password is too short" },
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
 
@@ -51,8 +55,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   if (!user) {
     return new Response(
-      JSON.stringify({ errors: { email: "Invalid email or password", password: null } }),
-      { status: 400, headers: { "Content-Type": "application/json" } }
+      JSON.stringify({
+        errors: { email: "Invalid email or password", password: null },
+      }),
+      { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
 

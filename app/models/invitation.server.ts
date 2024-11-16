@@ -1,8 +1,8 @@
-import { Role } from '@prisma/client'; // Import Role enum directly from Prisma client
-import bcrypt from 'bcrypt';
-import { v4 as uuidv4 } from 'uuid';
+import { Role } from "@prisma/client"; // Import Role enum directly from Prisma client
+import bcrypt from "bcrypt";
+import { v4 as uuidv4 } from "uuid";
 
-import { prisma } from '~/db.server'; // Import Prisma client instance
+import { prisma } from "~/db.server"; // Import Prisma client instance
 
 // Create Invitation
 export async function createInvitation({
@@ -49,11 +49,11 @@ export async function acceptInvitation({
   });
 
   if (!invitation || invitation.expiresAt < new Date()) {
-    throw new Error('Invalid or expired invitation token');
+    throw new Error("Invalid or expired invitation token");
   }
 
   if (invitation.email !== email) {
-    throw new Error('Email does not match the invitation');
+    throw new Error("Email does not match the invitation");
   }
 
   // Hash the password
@@ -99,16 +99,19 @@ export async function getInvitationsByRestaurant(restaurantId: string) {
   return prisma.invitation.findMany({
     where: { restaurantId },
   });
-} 
+}
 
 // Extend Invitation Expiry
-export async function extendInvitationExpiry(invitationId: string, additionalDays: number) {
+export async function extendInvitationExpiry(
+  invitationId: string,
+  additionalDays: number,
+) {
   const invitation = await prisma.invitation.findUnique({
     where: { id: invitationId },
   });
 
   if (!invitation) {
-    throw new Error('Invitation not found');
+    throw new Error("Invitation not found");
   }
 
   const newExpiryDate = new Date(invitation.expiresAt);

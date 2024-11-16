@@ -1,6 +1,6 @@
-import { SubscriptionPlan } from '@prisma/client';
+import { SubscriptionPlan } from "@prisma/client";
 
-import { prisma } from '~/db.server'; // Assuming we have a Prisma client setup
+import { prisma } from "~/db.server"; // Assuming we have a Prisma client setup
 
 // Create Subscription
 export async function createSubscription({

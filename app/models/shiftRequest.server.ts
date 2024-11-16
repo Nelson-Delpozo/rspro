@@ -1,6 +1,6 @@
-import { RequestType } from '@prisma/client';
+import { RequestType } from "@prisma/client";
 
-import { prisma } from '~/db.server'; // Assuming we have a Prisma client setup
+import { prisma } from "~/db.server"; // Assuming we have a Prisma client setup
 
 // Create Shift Request
 export async function createShiftRequest({
@@ -19,7 +19,7 @@ export async function createShiftRequest({
       shiftId,
       userId,
       type,
-      status: 'PENDING',
+      status: "PENDING",
       targetUserId,
     },
   });
@@ -50,11 +50,11 @@ export async function getShiftRequestsByShift(shiftId: string) {
 export async function approveShiftRequest(requestId: string) {
   const request = await prisma.shiftRequest.update({
     where: { id: requestId },
-    data: { status: 'APPROVED', resolvedAt: new Date() },
+    data: { status: "APPROVED", resolvedAt: new Date() },
   });
 
   // If the request is a drop or swap, unassign the current user
-  if (request.type === 'DROP' || request.type === 'SWAP') {
+  if (request.type === "DROP" || request.type === "SWAP") {
     await prisma.shift.update({
       where: { id: request.shiftId },
       data: { assignedToId: request.targetUserId || null },
@@ -68,7 +68,7 @@ export async function approveShiftRequest(requestId: string) {
 export async function rejectShiftRequest(requestId: string) {
   return prisma.shiftRequest.update({
     where: { id: requestId },
-    data: { status: 'REJECTED', resolvedAt: new Date() },
+    data: { status: "REJECTED", resolvedAt: new Date() },
   });
 }
 
@@ -86,7 +86,7 @@ export async function getPendingShiftRequests(restaurantId: string) {
       shift: {
         restaurantId,
       },
-      status: 'PENDING',
+      status: "PENDING",
     },
   });
 }

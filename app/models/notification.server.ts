@@ -1,6 +1,6 @@
-import { NotificationType } from '@prisma/client';
+import { NotificationType } from "@prisma/client";
 
-import { prisma } from '~/db.server'; // Assuming we have a Prisma client setup
+import { prisma } from "~/db.server"; // Assuming we have a Prisma client setup
 
 // Create Notification
 export async function createNotification({
@@ -29,7 +29,7 @@ export async function createNotification({
 export async function getNotificationsByUser(userId: string) {
   return prisma.notification.findMany({
     where: { recipientId: userId },
-    orderBy: { sentAt: 'desc' },
+    orderBy: { sentAt: "desc" },
   });
 }
 
@@ -48,7 +48,7 @@ export async function getUnreadNotificationsByUser(userId: string) {
       recipientId: userId,
       readAt: null,
     },
-    orderBy: { sentAt: 'desc' },
+    orderBy: { sentAt: "desc" },
   });
 }
 
