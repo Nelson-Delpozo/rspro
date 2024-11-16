@@ -4,7 +4,7 @@ export const meta: MetaFunction = () => [{ title: "Contact Us" }];
 
 export default function Contact() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-white">
+    <main className="flex flex-col flex-grow items-center justify-center bg-white">
       <div className="mx-auto w-full max-w-2xl px-8 py-16">
         <h1 className="text-3xl font-bold text-gray-900">Contact Us</h1>
         <p className="mt-4 text-lg text-gray-700">
@@ -64,6 +64,6 @@ export default function Contact() {
           </button>
         </form>
       </div>
-    </div>
+    </main>
   );
 }

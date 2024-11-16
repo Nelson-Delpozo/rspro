@@ -17,15 +17,14 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   });
 };
 
-
 export const meta: MetaFunction = () => [{ title: "Welcome to RS-PRO" }];
 
 export default function Index() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-white">
+    <main className="flex flex-col flex-grow items-center justify-center bg-white">
       <div className="mx-auto w-full max-w-md px-8 py-10 text-center">
         <h1 className="mb-6 text-4xl font-bold text-gray-800">
-          Welcome to RS-PRO
+          Welcome to Restaurant Scheduler PRO
         </h1>
         <p className="mb-8 text-lg text-gray-600">
           The ultimate solution for managing restaurant scheduling and

@@ -39,31 +39,33 @@ export default function App() {
   };
 
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full bg-white">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="h-full bg-gray-100 text-gray-900 flex flex-col min-h-screen">
+      <body className="h-full bg-white text-gray-900 flex flex-col min-h-screen">
         <header className="bg-blue-700 text-white p-4">
           <div className="container mx-auto flex justify-between items-center">
             <Link to="/" className="text-xl font-bold">
               RS-PRO
             </Link>
-            {user ? <button
+            {user ? (
+              <button
                 onClick={handleLogout}
                 className="bg-red-700 px-4 py-2 rounded hover:bg-red-600 focus:bg-red-400"
               >
                 Logout
-              </button> : null}
+              </button>
+            ) : null}
           </div>
         </header>
         <div className="flex-grow">
           <Outlet />
         </div>
-        <footer className="bg-blue-700 text-white p-4 mt-auto w-full">
+        <footer className="bg-blue-700 text-white p-4">
           <div className="container mx-auto flex justify-between items-center">
             <p>&copy; {new Date().getFullYear()} RS PRO</p>
             <div className="flex space-x-4">
