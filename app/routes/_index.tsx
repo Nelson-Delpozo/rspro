@@ -33,7 +33,7 @@ export default function Index() {
         <div className="space-y-4">
           <Link
             to="/join"
-            className="block w-full rounded bg-blue-700 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-700"
+            className="block w-full rounded bg-blue-900 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-700"
           >
             Create an Account
           </Link>
