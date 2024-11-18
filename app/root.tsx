@@ -55,7 +55,7 @@ export default function App() {
             {user ? (
               <button
                 onClick={handleLogout}
-                className="bg-red-700 px-4 py-2 rounded hover:bg-red-600 focus:bg-red-400"
+                className="bg-red-900 px-4 py-2 rounded hover:bg-red-600 focus:bg-red-400"
               >
                 Logout
               </button>

@@ -1,7 +1,11 @@
 import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
 
-import type { User } from "~/models/user.server";
+interface User {
+  id: string;
+  email: string;
+  // Add other properties of User as needed
+}
 
 const DEFAULT_REDIRECT = "/";
 

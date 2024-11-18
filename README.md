@@ -172,3 +172,7 @@ Testing:
 Add integration and end-to-end tests for workflows.
 This document serves as a snapshot of the app’s current state and a reference for future development. Keep it updated as new features are added or milestones are achieved.
 
+re-factor join page--- should default to restaurant, and employee join should only be accessible through invitation link
+also join as restaurant is trying to use token for account create.
+
+
