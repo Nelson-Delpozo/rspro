@@ -28,7 +28,7 @@ export default function DashboardIndex() {
           <h1 className="font-bungee mb-4 text-3xl">Manager Dashboard</h1>
           <h1 className="font-bungee mb-4 text-xl">{user.name}</h1>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Link
               to="/dashboard/employees"
               className="flex transform items-center rounded-md border border-gray-300 p-3 shadow-sm transition-transform hover:scale-105 focus:ring-2 focus:ring-blue-500"

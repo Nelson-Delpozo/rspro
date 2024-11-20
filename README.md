@@ -122,10 +122,11 @@ prisma/
     CRUD
 
 5) user managment
-    edit, delete, send invitation, see availability, assign/unassign shifts, roles
+    update, delete, send invitation, see availability, assign/unassign shifts, notifications
 
 6) notifications
     system-generated on updates, approvals, declines, shift-requests, shift-assigns
+    send/receive from dashboard
 
 7) schedule view and auto-scheduling
 
