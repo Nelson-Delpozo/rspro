@@ -341,7 +341,7 @@ export default function Join() {
           ) : (
             // Restaurant Registration Form
             <>
-            <h2 className="text-3xl font-bold text-center text-gray-900">Register New Restaurant Account</h2>
+            <h2 className="text-3xl font-bold text-center text-gray-900 font-bungee">Register New Restaurant Account</h2>
               <div>
                 <label
                   htmlFor="restaurantName"
