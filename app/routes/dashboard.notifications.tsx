@@ -24,7 +24,7 @@ export default function NotificationsPage() {
     <div className="container mx-auto p-6 text-center">
       {isManager ? (
         <>
-          <h2 className="font-bungee mb-4 text-2xl">Manage Notifications</h2>
+          <h2 className="font-pressStart mb-4 text-2xl">Manage Notifications</h2>
           {/* Placeholder content - Add notifications management functionality here */}
           <Link
             to="/dashboard"
@@ -35,7 +35,7 @@ export default function NotificationsPage() {
         </>
       ) : (
         <>
-          <h2 className="font-bungee mb-4 text-2xl">Your Notifications</h2>
+          <h2 className="font-pressStart mb-4 text-2xl">Your Notifications</h2>
           {/* Placeholder content - Add notifications viewing functionality for employees */}
           <Link
             to="/dashboard"

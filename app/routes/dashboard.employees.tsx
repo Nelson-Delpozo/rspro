@@ -21,7 +21,7 @@ export default function EmployeesPage() {
 
   return (
     <div className="container mx-auto p-6 text-center">
-      <h2 className="font-bungee mb-4 text-2xl">Staff Management</h2>
+      <h2 className="font-pressStart mb-4 text-2xl">Staff Management</h2>
       {/* Placeholder content - Add employee management functionality here */}
       <Link
         to="/dashboard"

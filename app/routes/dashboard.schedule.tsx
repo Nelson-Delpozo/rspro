@@ -24,7 +24,7 @@ export default function SchedulePage() {
     <div className="container mx-auto p-6 text-center">
       {isManager ? (
         <>
-          <h2 className="font-bungee mb-4 text-2xl">Schedule Management</h2>
+          <h2 className="font-pressStart mb-4 text-2xl">Schedule Management</h2>
           {/* Placeholder content - Add schedule management functionality here */}
           <Link
             to="/dashboard"
@@ -35,7 +35,7 @@ export default function SchedulePage() {
         </>
       ) : (
         <>
-          <h2 className="mb-4 text-2xl font-bungee">Your Schedule</h2>
+          <h2 className="mb-4 text-2xl font-pressStart">Your Schedule</h2>
           {/* Placeholder content - Add schedule viewing functionality for employees */}
           <Link
             to="/dashboard"

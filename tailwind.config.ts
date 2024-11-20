@@ -5,7 +5,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        bungee: ['Bungee Spice', 'sans-serif'],
+
+        pressStart: ['"Press Start 2P"', 'sans-serif'], 
       },
     },
   },

@@ -28,7 +28,7 @@ export default function Index() {
         alt="clock"
         className="rounded-md mx-auto mb-5"
       />
-        <h1 className="mb-6 text-4xl font-bold text-red-600 font-bungee">
+        <h1 className="mb-6 text-2xl font-pressStart text-red-700">
           Restaurant Scheduler PRO
         </h1>
         <p className="mb-8 text-lg text-gray-600">

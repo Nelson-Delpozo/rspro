@@ -24,7 +24,7 @@ export default function AvailabilityPage() {
     <div className="container mx-auto p-6 text-center">
       {isManager ? (
         <>
-          <h2 className="font-bungee mb-4 text-2xl">
+          <h2 className="font-pressStart mb-4 text-2xl">
             Manage Employee Availability
           </h2>
           {/* Placeholder content - Add availability management functionality here */}
@@ -37,7 +37,7 @@ export default function AvailabilityPage() {
         </>
       ) : (
         <>
-          <h2 className="font-bungee mb-4 text-2xl">Your Availability</h2>
+          <h2 className="font-pressStart mb-4 text-2xl">Your Availability</h2>
           {/* Placeholder content - Add availability viewing/updating functionality for employees */}
           <Link
             to="/dashboard"

@@ -45,17 +45,6 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap"
-          rel="stylesheet"
-        />
-
         <Meta />
         <Links />
       </head>
@@ -64,7 +53,7 @@ export default function App() {
           <div className="container mx-auto flex items-center justify-between">
             <Link
               to="/"
-              className="font-convergence font-bungee text-xl font-bold"
+              className="font-convergence font-pressStart text-xl font-bold"
             >
               RS-PRO
             </Link>
@@ -81,13 +70,13 @@ export default function App() {
         <div className="flex-grow">
           <Outlet />
         </div>
-        <footer className="bg-blue-900 p-4 text-white py-5">
+        <footer className="bg-blue-900 p-4 py-5 text-white">
           <div className="container mx-auto flex flex-col items-center">
             <p className="text-center">
               &copy; {new Date().getFullYear()} Restaurant Scheduler PRO
             </p>
             <div className="mt-2 flex flex-wrap justify-center space-x-4">
-            <Link to="/help" className="hover:underline">
+              <Link to="/help" className="hover:underline">
                 Help
               </Link>
               <Link to="/about" className="hover:underline">

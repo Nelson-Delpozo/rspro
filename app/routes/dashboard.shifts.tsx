@@ -55,7 +55,7 @@ export default function ShiftsPage() {
     <div className="container mx-auto p-6 text-center">
       {isManager ? (
         <>
-          <h2 className="mb-4 text-2xl font-bungee">
+          <h2 className="mb-4 text-2xl font-pressStart">
             Shift Management
           </h2>
 
@@ -106,7 +106,7 @@ export default function ShiftsPage() {
         </>
       ) : (
         <>
-          <h2 className="mb-4 text-2xl font-bungee">Your Shifts</h2>
+          <h2 className="mb-4 text-2xl font-pressStart">Your Shifts</h2>
           {shifts.length === 0 ? (
             <p className="text-red-500">
               You currently have no shifts assigned
