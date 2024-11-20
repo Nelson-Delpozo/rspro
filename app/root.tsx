@@ -51,7 +51,10 @@ export default function App() {
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap"
+          rel="stylesheet"
+        />
 
         <Meta />
         <Links />
@@ -59,7 +62,10 @@ export default function App() {
       <body className="flex h-full min-h-screen flex-col bg-white text-gray-900">
         <header className="bg-blue-900 p-4 text-white">
           <div className="container mx-auto flex items-center justify-between">
-            <Link to="/" className="font-convergence text-xl font-bold font-bungee">
+            <Link
+              to="/"
+              className="font-convergence font-bungee text-xl font-bold"
+            >
               RS-PRO
             </Link>
             {user ? (
@@ -76,18 +82,24 @@ export default function App() {
           <Outlet />
         </div>
         <footer className="bg-blue-900 p-4 text-white">
-          <div className="container mx-auto flex items-center justify-between">
-            <p>&copy; {new Date().getFullYear()} RS PRO</p>
-            <div className="flex space-x-4">
+          <div className="container mx-auto flex flex-col items-center">
+            <p className="text-center">
+              &copy; {new Date().getFullYear()} Restaurant Scheduler PRO
+            </p>
+            <div className="mt-2 flex flex-wrap justify-center space-x-4">
               <Link to="/about" className="hover:underline">
                 About
               </Link>
               <Link to="/contact" className="hover:underline">
                 Contact
               </Link>
+              <Link to="/policies" className="hover:underline">
+                Policies
+              </Link>
             </div>
           </div>
         </footer>
+
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

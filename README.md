@@ -54,63 +54,37 @@ availability.server.ts:
 
 Manages CRUD operations for employee availability.
 Filters by date range and restaurant.
+
 shift.server.ts:
 
 Handles CRUD operations for shifts, including assignments and role filtering.
+
 user.server.ts:
 
 Handles user CRUD, authentication, and role management.
+
 restaurant.server.ts:
 
 Manages restaurant creation, updates, and associated data.
+
 notification.server.ts:
 
 Sends and retrieves notifications for managers and employees.
+
 shiftRequest.server.ts:
 
 Handles shift request workflows (swap, drop, pickup).
+
 subscription.server.ts:
 
 Manages subscriptions, trial validation, and Stripe integration.
+
 invitation.server.ts:
 
 Handles onboarding of employees via unique invitation links.
-File Structure
-Routes
-plaintext
-Copy code
-src/
-  routes/
-    dashboard/
-      index.tsx                # Manager dashboard
-      shifts.tsx               # Shift management
-      availability.tsx         # Employee availability management
-      requests.tsx             # Shift requests
-      notifications.tsx        # Notifications panel
-    api/
-      users.tsx                # API for users
-      restaurants.tsx          # API for restaurants
-      subscriptions.tsx        # API for subscriptions
-      notifications.tsx        # API for notifications
-      shifts.tsx               # API for shifts
-      availability.tsx         # API for availability
-      requests.tsx             # API for shift requests
-      invitations.tsx          # API for invitations
-    auth/
-      login.tsx                # Login page
-      logout.tsx               # Logout action
-      signup.tsx               # Manager signup
-    invitations/
-      accept.tsx               # Accept invitation to create account
-    subscription/
-      billing.tsx              # Subscription management and billing
-      trial-expired.tsx        # Trial expiration warning
-    index.tsx                  # Landing page
-    about.tsx                  # About page
-    contact.tsx                # Contact page
+
 Models
-plaintext
-Copy code
+
 src/
   models/
     availability.server.ts
@@ -127,69 +101,41 @@ Copy code
 prisma/
   schema.prisma               # Database schema
   seed.ts                     # Seed script
-Completed Milestones
-Prisma Schema:
-
-Designed a robust schema with all necessary relationships and enums.
-Fixed migration errors and ran successful migrations.
-Verified data integrity through Prisma Studio after seeding.
-Seed Data:
-
-Created seed data for:
-A restaurant with users, shifts, and availability.
-Shift requests and notifications.
-A subscription linked to Stripe placeholders.
-Server Files:
-
-Implemented reusable database functions for all models.
-File Structure:
-
-Organized routes and models for maintainability and scalability.
-Next Steps
-Short-Term
-Build Core API Routes:
-
-Implement API endpoints for key models (users, shifts, availability, requests, etc.).
-Use server files to fetch and manipulate data.
-Front-End Integration:
-
-Create loaders and actions for dashboard routes.
-Design forms for managing shifts, availability, and requests.
-Authentication:
-
-Implement user authentication (login/signup).
-Add role-based access control for routes.
-Long-Term
-Stripe Integration:
-
-Connect Stripe for subscription management.
-Validate trial periods.
-AI for Scheduling:
-
-Research and integrate AI for auto-generating shifts.
-Testing:
-
-Add integration and end-to-end tests for workflows.
-This document serves as a snapshot of the app’s current state and a reference for future development. Keep it updated as new features are added or milestones are achieved.
-
-manager account needs to have 'my shifts' included under shifts tab for days they work including role.
-create edit, delete, assign/unassign shifts - manager view
-view, drop, swap, pickup shifts, see my shifts and open shifts- employee view
-schedule view both
-
-what to do with template shifts/schedules?
-
-create, edit, delete availabilities- employee view
-
-send invitations, edit, delete employees- manager view
-invitations are currently defaulting to an expiration date of 1970
-should also be able to see availability in a modal
 
 
-manager should be able to assign employee to a shift, or assign a shift to an employee in either view
+1) new restaurant should create subscription
+    set to active, set plan, set trial date, determine end-of-trial protocols
+    prevent double trials
 
-new restaurant should create and start trial
+2) invitation functionality
+    fix expiration date
+    manager view send invitation
+    email, text?
+    follow up reminder notification
+    manager notification of unaccepted invitations
 
-what's the font situation
+3) shift functionality
+    create, edit, delete, assign/unassign, my-shifts, swap, drop, pickup, templates
+    tab view
+
+4) availability functionality
+    CRUD
+
+5) user managment
+    edit, delete, send invitation, see availability, assign/unassign shifts, roles
+
+6) notifications
+    system-generated on updates, approvals, declines, shift-requests, shift-assigns
+
+7) schedule view and auto-scheduling
+
+8) update contact and about
+
+
+
+
+
+
+
 
 
