@@ -9,7 +9,7 @@ export default function Policies() {
         <div className="mx-auto w-full max-w-2xl px-8 py-16">
         <h1 className="text-3xl font-bold text-gray-900 font-bungee">Policies</h1>
         <p className="mt-4 text-lg text-gray-700 mb-5">
-          Please use the buttons below to view our policies
+          Please use the buttons below to view our policies.
         </p>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Link
