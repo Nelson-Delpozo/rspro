@@ -24,23 +24,25 @@ export default function AvailabilityPage() {
     <div className="container mx-auto p-6 text-center">
       {isManager ? (
         <>
-          <h2 className="mb-4 text-2xl font-bold">Manage Employee Availability</h2>
-          <p className="mb-4">
-            Welcome, {user.name}. Here you can view and manage availability for your employees.
-          </p>
+          <h2 className="font-bungee mb-4 text-2xl">
+            Manage Employee Availability
+          </h2>
           {/* Placeholder content - Add availability management functionality here */}
-          <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <Link
+            to="/dashboard"
+            className="mt-4 inline-block rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+          >
             Back to Dashboard
           </Link>
         </>
       ) : (
         <>
-          <h2 className="mb-4 text-2xl font-bold">View Your Availability</h2>
-          <p className="mb-4">
-            Welcome, {user.name}. Here you can view and update your availability.
-          </p>
+          <h2 className="font-bungee mb-4 text-2xl">Your Availability</h2>
           {/* Placeholder content - Add availability viewing/updating functionality for employees */}
-          <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600">
+          <Link
+            to="/dashboard"
+            className="mt-4 inline-block rounded bg-blue-900 px-4 py-2 text-white hover:bg-blue-600"
+          >
             Back to Dashboard
           </Link>
         </>

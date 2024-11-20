@@ -24,23 +24,23 @@ export default function SchedulePage() {
     <div className="container mx-auto p-6 text-center">
       {isManager ? (
         <>
-          <h2 className="mb-4 text-2xl font-bold">Manage Employee Schedule</h2>
-          <p className="mb-4">
-            Welcome, {user.name}. Here you can create, edit, and manage schedules for your employees.
-          </p>
+          <h2 className="font-bungee mb-4 text-2xl">Schedule Management</h2>
           {/* Placeholder content - Add schedule management functionality here */}
-          <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600">
+          <Link
+            to="/dashboard"
+            className="mt-4 inline-block rounded bg-blue-900 px-4 py-2 text-white hover:bg-blue-600"
+          >
             Back to Dashboard
           </Link>
         </>
       ) : (
         <>
-          <h2 className="mb-4 text-2xl font-bold">View Your Schedule</h2>
-          <p className="mb-4">
-            Welcome, {user.name}. Here you can view your work schedule.
-          </p>
+          <h2 className="mb-4 text-2xl font-bungee">Your Schedule</h2>
           {/* Placeholder content - Add schedule viewing functionality for employees */}
-          <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600">
+          <Link
+            to="/dashboard"
+            className="mt-4 inline-block rounded bg-blue-900 px-4 py-2 text-white hover:bg-blue-600"
+          >
             Back to Dashboard
           </Link>
         </>

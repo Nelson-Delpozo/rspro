@@ -17,14 +17,18 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function EmployeesPage() {
   const { user } = useLoaderData<{ user: { name: string } }>();
 
+  console.log(user); // Use the user variable
+
   return (
     <div className="container mx-auto p-6 text-center">
-      <h2 className="mb-4 text-2xl font-bold">Manage Employees</h2>
-      <p className="mb-4">
-        Welcome, {user.name}. Here you can add, edit, and manage your employees.
-      </p>
+      <h2 className="font-bungee mb-4 text-2xl">Staff Management</h2>
       {/* Placeholder content - Add employee management functionality here */}
-      <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600">Back to Dashboard</Link>
+      <Link
+        to="/dashboard"
+        className="mt-4 inline-block rounded bg-blue-900 px-4 py-2 text-white hover:bg-blue-600"
+      >
+        Back to Dashboard
+      </Link>
     </div>
   );
 }

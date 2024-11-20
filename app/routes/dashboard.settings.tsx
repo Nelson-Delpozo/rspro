@@ -17,12 +17,18 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function SettingsPage() {
   const { user } = useLoaderData<{ user: { name: string } }>();
 
+  console.log(user);
+
   return (
     <div className="container mx-auto p-6 text-center">
-      <h2 className="text-2xl font-bold mb-4">Account Settings</h2>
-      <p className="mb-4">Welcome, {user.name}. Here you can manage your account settings and preferences.</p>
+      <h2 className="font-bungee mb-4 text-2xl">Account Management</h2>
       {/* Placeholder content - Add account settings management functionality here */}
-      <Link to="/dashboard" className="inline-block mt-4 px-4 py-2 bg-blue-900 text-white rounded hover:bg-blue-600">Back to Dashboard</Link>
+      <Link
+        to="/dashboard"
+        className="mt-4 inline-block rounded bg-blue-900 px-4 py-2 text-white hover:bg-blue-600"
+      >
+        Back to Dashboard
+      </Link>
     </div>
   );
 }
