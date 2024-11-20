@@ -1,12 +1,12 @@
 import type { MetaFunction } from "@remix-run/node";
 
-export const meta: MetaFunction = () => [{ title: "About Us" }];
+export const meta: MetaFunction = () => [{ title: "Help" }];
 
-export default function About() {
+export default function Help() {
   return (
     <main className="flex flex-col flex-grow items-center justify-center bg-white">
       <div className="mx-auto w-full max-w-2xl px-8 py-16">
-        <h1 className="text-3xl font-bold text-gray-900 font-bungee">About RS-Pro</h1>
+        <h1 className="text-3xl font-bold text-gray-900 font-bungee">Help Center</h1>
         <p className="mt-4 text-lg text-gray-700">
           Welcome to our restaurant scheduling app! We are committed to providing
           an easy-to-use solution for restaurant managers and staff to handle

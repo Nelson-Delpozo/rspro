@@ -87,6 +87,9 @@ export default function App() {
               &copy; {new Date().getFullYear()} Restaurant Scheduler PRO
             </p>
             <div className="mt-2 flex flex-wrap justify-center space-x-4">
+            <Link to="/help" className="hover:underline">
+                Help
+              </Link>
               <Link to="/about" className="hover:underline">
                 About
               </Link>

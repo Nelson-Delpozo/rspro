@@ -129,7 +129,7 @@ prisma/
 
 7) schedule view and auto-scheduling
 
-8) update contact and about
+8) update contact, about, policies, help
 
 
 
