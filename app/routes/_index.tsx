@@ -40,7 +40,7 @@ export default function Index() {
             to="/join"
             className="block w-full rounded bg-blue-900 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-700"
           >
-            Create an Account
+            Start Free Trial
           </Link>
           <Link
             to="/login"
