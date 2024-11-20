@@ -172,7 +172,23 @@ Testing:
 Add integration and end-to-end tests for workflows.
 This document serves as a snapshot of the app’s current state and a reference for future development. Keep it updated as new features are added or milestones are achieved.
 
-re-factor join page--- should default to restaurant, and employee join should only be accessible through invitation link
-also join as restaurant is trying to use token for account create.
+manager account needs to have 'my shifts' included under shifts tab for days they work including role.
+create edit, delete, assign/unassign shifts - manager view
+view, drop, swap, pickup shifts, see my shifts and open shifts- employee view
+schedule view both
+
+what to do with template shifts/schedules?
+
+create, edit, delete availabilities- employee view
+
+send invitations, edit, delete employees- manager view
+invitations are currently defaulting to an expiration date of 1970
+should also be able to see availability in a modal
+
+
+manager should be able to assign employee to a shift, or assign a shift to an employee in either view
+
+new restaurant should create and start trial
+
 
 
