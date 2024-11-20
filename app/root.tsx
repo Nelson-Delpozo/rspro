@@ -81,7 +81,7 @@ export default function App() {
         <div className="flex-grow">
           <Outlet />
         </div>
-        <footer className="bg-blue-900 p-4 text-white">
+        <footer className="bg-blue-900 p-4 text-white py-5">
           <div className="container mx-auto flex flex-col items-center">
             <p className="text-center">
               &copy; {new Date().getFullYear()} Restaurant Scheduler PRO
