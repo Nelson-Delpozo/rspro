@@ -25,8 +25,8 @@ export default function DashboardIndex() {
     <div className="container mx-auto p-6 text-center">
       {isManager ? (
         <>
-          <h1 className="font-pressStart mb-4 text-3xl">Manager Dashboard</h1>
-          <h1 className="font-pressStart mb-4 text-xl">{user.name}</h1>
+          <h1 className="font-pressStart mb-4 text-3xl text-red-700">Manager Dashboard</h1>
+          <h1 className="font-pressStart mb-4 text-xl text-red-500">{user.name}</h1>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Link
@@ -79,10 +79,10 @@ export default function DashboardIndex() {
         </>
       ) : (
         <>
-          <h1 className="font-pressStart mb-4 text-3xl">
+          <h1 className="font-pressStart mb-4 text-3xl text-red-700">
             Employee Dashboard
           </h1>
-          <h1 className="font-pressStart mb-4 text-xl">{user.name}</h1>
+          <h1 className="font-pressStart mb-4 text-xl text-red-500">{user.name}</h1>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Link
