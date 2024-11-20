@@ -190,5 +190,6 @@ manager should be able to assign employee to a shift, or assign a shift to an em
 
 new restaurant should create and start trial
 
+what's the font situation
 
 

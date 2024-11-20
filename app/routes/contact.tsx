@@ -6,7 +6,7 @@ export default function Contact() {
   return (
     <main className="flex flex-col flex-grow items-center justify-center bg-white">
       <div className="mx-auto w-full max-w-2xl px-8 py-16">
-        <h1 className="text-3xl font-bold text-gray-900">Contact Us</h1>
+        <h1 className="text-3xl font-bold text-gray-900 font-bungee">Contact Us</h1>
         <p className="mt-4 text-lg text-gray-700">
           We&apos;d love to hear from you! Please fill out the form below to get in touch with us.
         </p>
