@@ -23,7 +23,13 @@ export default function Index() {
   return (
     <main className="flex flex-grow flex-col items-center justify-center bg-white">
       <div className="mx-auto w-full max-w-md px-8 py-10 text-center">
-        <h1 className="mb-6 text-4xl font-bold text-gray-800">
+      <img
+        src="/red-clock-icon-isolated-white-background_401257-565.jpg"
+        alt="clock"
+        className="rounded-md mx-auto"
+        style={{ width: '250px', height: '250px' }}
+      />
+        <h1 className="mb-6 text-4xl font-bold text-red-600 font-bungee">
           Restaurant Scheduler PRO
         </h1>
         <p className="mb-8 text-lg text-gray-600">

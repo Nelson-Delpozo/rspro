@@ -204,6 +204,7 @@ export default function Join() {
           {token ? (
             // Employee Registration Form
             <>
+            <h2 className="text-3xl text-center font-bold text-gray-900 font-bungee">Register from Invitation</h2>
               <input type="hidden" name="token" value={token} />
               <div>
                 <label
@@ -340,6 +341,7 @@ export default function Join() {
           ) : (
             // Restaurant Registration Form
             <>
+            <h2 className="text-3xl font-bold text-center text-gray-900 font-bungee">Register New Restaurant Account</h2>
               <div>
                 <label
                   htmlFor="restaurantName"

@@ -25,7 +25,7 @@ export default function DashboardIndex() {
     <div className="container mx-auto p-6 text-center">
       {isManager ? (
         <>
-          <h1 className="mb-4 text-3xl font-bold">
+          <h1 className="mb-4 text-3xl font-bold font-bungee">
             Manager Dashboard: {user.name}
           </h1>
           <p className="mb-6 text-lg">
@@ -83,7 +83,7 @@ export default function DashboardIndex() {
         </>
       ) : (
         <>
-          <h1 className="mb-4 text-3xl font-bold">
+          <h1 className="mb-4 text-3xl font-bold font-bungee">
             Employee Dashboard: {user.name}
           </h1>
           <p className="mb-6 text-lg">

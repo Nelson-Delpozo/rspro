@@ -45,13 +45,21 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet" />
+
         <Meta />
         <Links />
       </head>
       <body className="flex h-full min-h-screen flex-col bg-white text-gray-900">
         <header className="bg-blue-900 p-4 text-white">
           <div className="container mx-auto flex items-center justify-between">
-            <Link to="/" className="text-xl font-bold">
+            <Link to="/" className="font-convergence text-xl font-bold font-bungee">
               RS-PRO
             </Link>
             {user ? (
