@@ -39,7 +39,7 @@ export default function Policies() {
               T
             </div>
             <span className="text-lg font-medium text-gray-800">
-              Terms and Conditions
+              Terms of Use
             </span>
           </Link>
         </div>
