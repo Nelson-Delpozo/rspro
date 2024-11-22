@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 
-export const meta: MetaFunction = () => [{ title: "Help" }];
+export const meta: MetaFunction = () => [{ title: "Help Center" }];
 
 export default function Help() {
   return (

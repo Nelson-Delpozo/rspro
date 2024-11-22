@@ -103,8 +103,7 @@ schema.prisma # Database schema
 seed.ts # Seed script
 
 
-
-
+policies needs a title
 
 1. new restaurant should create subscription
    set to active, set plan, set trial date, determine end-of-trial protocols

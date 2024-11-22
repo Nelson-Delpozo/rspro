@@ -1,10 +1,12 @@
-import { Link, Outlet } from "@remix-run/react";
+import { Link, MetaFunction, Outlet } from "@remix-run/react";
+
+export const meta: MetaFunction = () => [{ title: "Policy Center" }];
 
 export default function Policies() {
   return (
     <main className="flex flex-col flex-grow items-center justify-center bg-white">
       <div className="mx-auto w-full max-w-4xl px-8 py-16">
-        <h1 className="text-3xl font-bold text-red-700 font-pressStart text-center">Policies</h1>
+        <h1 className="text-3xl font-bold text-red-700 font-pressStart text-center">Policy Center</h1>
         <p className="mt-4 text-lg text-gray-700 mb-5 text-center">
           Please use the buttons below to view our policies.
         </p>

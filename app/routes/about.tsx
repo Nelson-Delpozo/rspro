@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 
-export const meta: MetaFunction = () => [{ title: "About Us" }];
+export const meta: MetaFunction = () => [{ title: "About RS-PRO" }];
 
 export default function About() {
   return (

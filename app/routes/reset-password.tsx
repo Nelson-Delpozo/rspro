@@ -98,7 +98,7 @@ export default function ResetPassword() {
         {token ? (
           // Set New Password Form
           <>
-            <h1 className="text-2xl font-pressStart text-red-700 text-center mb-4">Set New Password</h1>
+            <h1 className="text-2xl font-pressStart font-bold text-red-700 text-center mb-4">Set New Password</h1>
             {actionData?.error ? (
               <div className="mb-4 text-sm text-red-600">{actionData.error}</div>
             ) : null}
@@ -152,7 +152,7 @@ export default function ResetPassword() {
         ) : (
           // Send Reset Link Form
           <>
-            <h1 className="text-2xl font-pressStart text-red-700 text-center mb-4">Reset Password</h1>
+            <h1 className="text-2xl font-pressStart text-red-700 font-bold text-center mb-4">Reset Password</h1>
             {actionData?.error ? (
               <div className="mb-4 text-sm text-red-600">{actionData.error}</div>
             ) : null}
