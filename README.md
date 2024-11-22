@@ -86,57 +86,53 @@ Handles onboarding of employees via unique invitation links.
 Models
 
 src/
-  models/
-    availability.server.ts
-    shift.server.ts
-    user.server.ts
-    restaurant.server.ts
-    notification.server.ts
-    shiftRequest.server.ts
-    subscription.server.ts
-    invitation.server.ts
+models/
+availability.server.ts
+shift.server.ts
+user.server.ts
+restaurant.server.ts
+notification.server.ts
+shiftRequest.server.ts
+subscription.server.ts
+invitation.server.ts
 Database
 plaintext
 Copy code
 prisma/
-  schema.prisma               # Database schema
-  seed.ts                     # Seed script
-
-
-1) new restaurant should create subscription
-    set to active, set plan, set trial date, determine end-of-trial protocols
-    prevent double trials
-
-2) invitation functionality
-    fix expiration date
-    manager view send invitation
-    email, text?
-    follow up reminder notification
-    manager notification of unaccepted invitations
-
-3) shift functionality
-    create, edit, delete, assign/unassign, my-shifts, swap, drop, pickup, templates
-    tab view
-
-4) availability functionality
-    CRUD
-
-5) user managment
-    update, delete, send invitation, see availability, assign/unassign shifts, notifications
-
-6) notifications
-    system-generated on updates, approvals, declines, shift-requests, shift-assigns
-    send/receive from dashboard
-
-7) schedule view and auto-scheduling
-
-8) update contact, about, policies, help
+schema.prisma # Database schema
+seed.ts # Seed script
 
 
 
 
 
+1. new restaurant should create subscription
+   set to active, set plan, set trial date, determine end-of-trial protocols
+   prevent double trials
 
+   
 
+2. shift functionality
+   create, edit, delete, assign/unassign, my-shifts, {swap, drop, pickup, templates
+   tab view}
 
+3. availability functionality
+   CRUD
 
+4. notifications
+   system-generated on updates, approvals, declines, shift-requests, shift-assigns
+   send/receive from dashboard
+
+5. user managment
+      update, delete, send invitation, see availability, assign/unassign shifts, notifications
+
+5. invitation functionality
+   fix expiration date
+   manager view send invitation
+   email, text?
+   follow up reminder notification
+   manager notification of unaccepted invitations
+
+6. schedule view and auto-scheduling
+
+7. update contact, about, help

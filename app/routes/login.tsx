@@ -182,6 +182,14 @@ export default function LoginPage() {
                 Sign up
               </Link>
             </div>
+            <div className="text-center text-sm text-gray-500">
+              <Link
+                className="text-blue-700 underline"
+                to="/reset-password"
+              >
+                Forgot password?
+              </Link>
+            </div>
           </div>
         </Form>
       </div>

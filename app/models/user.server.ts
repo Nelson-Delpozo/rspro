@@ -225,3 +225,22 @@ export type Role =
   | "KITCHEN"
   | "BARBACK"
   | "EXPO";
+
+
+// Get User by Reset Token
+export async function getUserByResetToken(token: string) {
+  return prisma.user.findFirst({
+    where: {
+      resetToken: token,
+      resetTokenExpiresAt: {
+        gte: new Date(),
+      },
+    },
+  });
+}
+
+// Validate New Password
+export function validateNewPassword(password: string): boolean {
+  // Password validation rules (e.g., at least 8 characters)
+  return password.length >= 8;
+}
