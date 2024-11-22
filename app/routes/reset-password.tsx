@@ -3,6 +3,7 @@ import { redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useNavigation } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
+import { prisma } from "~/db.server";
 import { resetPassword, validateNewPassword, initiatePasswordReset } from "~/models/user.server";
 export const meta: MetaFunction = () => [{ title: "Reset Password" }];
 
@@ -14,25 +15,34 @@ export const action: ActionFunction = async ({ request }) => {
   const confirmPassword = formData.get("confirmPassword");
 
   if (email && typeof email === "string") {
-    try {
-      await initiatePasswordReset(email);
-      return redirect("/login?reset=link-sent"); // <-- Redirect after sending the link.
-    } catch (error) {
-      if ((error as Error).message.includes("active reset token")) {
-        return new Response(
-          JSON.stringify({ error: "A reset token is already active for this account. Please check your email." }),
-          {
-            status: 400,
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-      }
-      return new Response(JSON.stringify({ error: (error as Error).message }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+    // Check if a user with an active reset token exists
+    const userWithToken = await prisma.user.findFirst({
+      where: {
+        email: email,
+        resetTokenExpiresAt: {
+          gte: new Date(), // Check if token has not expired
+        },
+      },
+    });
+  
+    if (userWithToken) {
+      // If an active token exists, return an error message
+      return new Response(
+        JSON.stringify({
+          error: "A reset link was recently sent. Please check your email or try again in an hour.",
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
+  
+    // Generate and send a new reset token
+    await initiatePasswordReset(email);
+    return redirect("/login?reset=link-sent");
   }
+  
   
   if (token && typeof token === "string") {
     if (typeof password !== "string" || !validateNewPassword(password)) {
@@ -88,7 +98,7 @@ export default function ResetPassword() {
         {token ? (
           // Set New Password Form
           <>
-            <h1 className="text-2xl font-bold text-center mb-4">Set New Password</h1>
+            <h1 className="text-2xl font-pressStart text-red-700 text-center mb-4">Set New Password</h1>
             {actionData?.error ? (
               <div className="mb-4 text-sm text-red-600">{actionData.error}</div>
             ) : null}
@@ -142,7 +152,7 @@ export default function ResetPassword() {
         ) : (
           // Send Reset Link Form
           <>
-            <h1 className="text-2xl font-bold text-center mb-4">Reset Password</h1>
+            <h1 className="text-2xl font-pressStart text-red-700 text-center mb-4">Reset Password</h1>
             {actionData?.error ? (
               <div className="mb-4 text-sm text-red-600">{actionData.error}</div>
             ) : null}
