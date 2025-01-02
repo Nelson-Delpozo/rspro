@@ -102,36 +102,39 @@ prisma/
 schema.prisma # Database schema
 seed.ts # Seed script
 
+2. Notifications
+   - Email for password reset using Twilio
+   - Wire up the contact form
 
-policies needs a title
+3. New restaurant should create subscription
+   - Set to active, set plan to trial, set trial expiration date
+   - Account settings page needs Stripe integration
+   - Button to activate pro, cancel pro
+   - Take payment, set billing cycle, set plan to pro, send email
+   - Monthly payment reminders three days
+   - Reminders toward the end of the trial (one month, two weeks, one week, three days, last day)
 
-1. new restaurant should create subscription
-   set to active, set plan, set trial date, determine end-of-trial protocols
-   prevent double trials
+4. Availability functionality
+   - CRUD
 
-   
+5. Shift functionality
+   - Create, edit, delete, notes, assign/unassign (managers)
+   - My-shifts (both), open shifts (employee)
+   - Drop, pickup for employees (add 'open' to shift status for manager control?)
+   - Filter for shifts (assigned, unassigned, open, assigned to, date)
+   - System generated SMS for shift assignments, request approval/declines
 
-2. shift functionality
-   create, edit, delete, assign/unassign, my-shifts, {swap, drop, pickup, templates
-   tab view}
+6. User management
+   - Send invitation button/form - mark new user as 'new' until the manager views them
+   - Update, delete, see availability, assign/unassign shifts, filter view (role, availability)
 
-3. availability functionality
-   CRUD
+7. Invitation functionality
+   - Expiration date
+   - Manager view send invitation
+   - Email, text?
+   - Follow up reminder notification
+   - Manager notification of expired unaccepted invitations
 
-4. notifications
-   system-generated on updates, approvals, declines, shift-requests, shift-assigns
-   send/receive from dashboard
+8. Schedule view and auto-scheduling
 
-5. user managment
-      update, delete, send invitation, see availability, assign/unassign shifts, notifications
-
-5. invitation functionality
-   fix expiration date
-   manager view send invitation
-   email, text?
-   follow up reminder notification
-   manager notification of unaccepted invitations
-
-6. schedule view and auto-scheduling
-
-7. update contact, about, help
+9. Update about, help
